@@ -1,23 +1,50 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import Login from './views/Login.vue'
+import Manage from './views/Manage.vue'
 
 Vue.use(Router)
 
-export default new Router({
-  routes: [
-    {
+const router = new Router({
+  mode: "history",
+  routes: [{
       path: '/',
-      name: 'home',
-      component: Home
+      redirect: '/login'
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/login',
+      name: 'login',
+      meta: {
+        title: '登录'
+      },
+      component: Login
+    },
+    {
+      path: '/admin',
+      component: Manage,
+      name: 'manage',
+      children: [
+        {
+          path: '/home',
+          name: 'home',
+          meta: {
+            title: '用户列表',
+            label: ['用户列表']
+          },
+          component: Home
+        }
+      ]
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  } else {
+    document.title = "管理后台"
+  }
+  next()
+})
+export default router
