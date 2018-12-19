@@ -234,7 +234,7 @@ export default {
   },
   methods: {
     getData() {
-      this.axios.get(`${host}/admin/scanall`).then(res => {
+      this.axios.get(`/admin/scanall`).then(res => {
         if (res.data.state === 0) {
           this.originData = res.data.stulist;
           this.tableData = this.originData;
@@ -300,7 +300,7 @@ export default {
       let url = "";
       let temp_data = {};
       if (this.dialog_type == 1) {
-        url = `${host}/admin/register`;
+        url = `/admin/register`;
         temp_data = {
           period: this.form.period,
           initpwd: this.form.initpwd,
@@ -314,7 +314,7 @@ export default {
           ]
         };
       } else if (this.dialog_type == 2) {
-        url = `${host}/admin/revise`;
+        url = `/admin/revise`;
         temp_data = {
           userid: this.form.userid,
           stuid: this.form.stuid,
@@ -359,7 +359,7 @@ export default {
             stuid: this.form2.stuid,
             initpwd: this.form2.pass
           };
-          this.axios.post(`${host}/admin/initpwd`, temp_data).then(res => {
+          this.axios.post(`/admin/initpwd`, temp_data).then(res => {
             if (res.data.state === 0) {
               this.$message({
                 message: "修改成功",

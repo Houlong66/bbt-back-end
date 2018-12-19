@@ -38,7 +38,7 @@ export default {
         account: this.formLogin.loginName,
         pwd: this.formLogin.password
       }
-      this.axios.post(`${host}/admin/login`, temp_data).then((res) => {
+      this.axios.post(`/admin/login`, temp_data).then((res) => {
         if (res.data.state === 0) {
           this.$message({
             message: "登录成功",

@@ -29,7 +29,7 @@
       if (command == 'home') {
         this.$router.push('/home');
       }else if(command == 'singout'){
-        this.axios.get(`${host}/admin/logout`).then((res) => {
+        this.axios.get(`/admin/logout`).then((res) => {
           if (res.data.state === 0) {
             this.$router.push('/')
           } else {
